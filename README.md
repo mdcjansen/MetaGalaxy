@@ -27,7 +27,7 @@ A pipeline for metagenomic assembly and analysis, which can be used on Galaxy
 
 ## Installation
 
-Installation has not been properly tested yet and might be incomplete
+Installation of the tools in the /lib/ folder has not been properly tested yet and thus the install.sh file might not work
 
 Install dependecies:
 ```
