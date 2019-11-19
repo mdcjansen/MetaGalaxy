@@ -1,7 +1,7 @@
 /// @file htslib/hts.h
 /// Format-neutral I/O, indexing, and iterator API functions.
 /*
-    Copyright (C) 2012-2016 Genome Research Ltd.
+    Copyright (C) 2012-2019 Genome Research Ltd.
     Copyright (C) 2010, 2012 Broad Institute.
     Portions copyright (C) 2003-2006, 2008-2010 by Heng Li <lh3@live.co.uk>
 
@@ -36,6 +36,15 @@ DEALINGS IN THE SOFTWARE.  */
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+// Separator used to split HTS_PATH (for plugins); REF_PATH (cram references)
+#if defined(_WIN32) || defined(__MSYS__)
+#define HTS_PATH_SEPARATOR_CHAR ';'
+#define HTS_PATH_SEPARATOR_STR  ";"
+#else
+#define HTS_PATH_SEPARATOR_CHAR ':'
+#define HTS_PATH_SEPARATOR_STR  ":"
 #endif
 
 #ifndef HTS_BGZF_TYPEDEF

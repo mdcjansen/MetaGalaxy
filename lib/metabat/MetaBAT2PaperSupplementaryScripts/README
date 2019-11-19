@@ -1,0 +1,14 @@
+# This folder contains several scripts that were used in the MetaBAT2 paper.
+
+
+## Requirements:
+
+To replicate the results we showed in the paper, you'll need the following:
+
+  1. BAM files from each sample. If you want to generate BAM files yourself, we recommend the BBMap from the bbtools package.(https://jgi.doe.gov/data-and-tools/bbtools/) 
+  2. MetaBAT2, CONCOCT, MaxBin or other software tools installed 
+
+## List of scripts:
+  1. runBBMap.sh: The BASH script to run BBMap to create the BAM files
+  2. benchmark.R: This runs the benchmarking and profiles performance of tools listed above using CAMI datasets.
+  3. binning.R is the script we used to perform the binning on CAMI datasets for our MetaBAT 2 paper.

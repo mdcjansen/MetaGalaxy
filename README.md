@@ -31,7 +31,7 @@ Installation has not been properly tested yet and might be incomplete
 
 Install dependecies:
 ```
-sudo apt-get install -y build-essential git qtbase5-dev libqt5svg5-dev libboost-all-dev curl libncurses5-dev zlib1g-dev pkg-config libfreetype6-dev libpng-dev cmake gcc g++ zlib libbz2 liblzma libcurl libcrypto autoheader autoconf
+sudo apt-get install -y build-essential git qtbase5-dev libqt5svg5-dev libboost-all-dev curl libncurses5-dev zlib1g-dev pkg-config libfreetype6-dev libpng-dev cmake gcc g++ libbz2-dev liblzma-dev autoconf python-setuptools
 ```
 
 Install MetaGalaxy:

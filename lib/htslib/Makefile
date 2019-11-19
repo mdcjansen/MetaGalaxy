@@ -293,7 +293,7 @@ libhts.dylib: $(LIBHTS_OBJS)
 	$(CC) -dynamiclib -install_name $(libdir)/libhts.$(LIBHTS_SOVERSION).dylib -current_version $(NUMERIC_VERSION) -compatibility_version $(MACH_O_COMPATIBILITY_VERSION) $(LDFLAGS) -o $@ $(LIBHTS_OBJS) $(LIBS)
 	ln -sf $@ libhts.$(LIBHTS_SOVERSION).dylib
 
-cyghts-$(LIBHTS_SOVERSION).dll: $(LIBHTS_OBJS)
+cyghts-$(LIBHTS_SOVERSION).dll libhts.dll.a: $(LIBHTS_OBJS)
 	$(CC) -shared -Wl,--out-implib=libhts.dll.a -Wl,--enable-auto-import $(LDFLAGS) -o $@ -Wl,--whole-archive $(LIBHTS_OBJS) -Wl,--no-whole-archive $(LIBS) -lpthread
 
 hts-$(LIBHTS_SOVERSION).dll hts.dll.a: $(LIBHTS_OBJS)
@@ -310,10 +310,10 @@ hts-object-files: $(LIBHTS_OBJS)
 .o.bundle:
 	$(CC) -bundle -Wl,-undefined,dynamic_lookup $(LDFLAGS) -o $@ $< $(LIBS)
 
-.o.cygdll:
+%.cygdll: %.o libhts.dll.a
 	$(CC) -shared $(LDFLAGS) -o $@ $< libhts.dll.a $(LIBS)
 
-.o.dll:
+%.dll: %.o hts.dll.a
 	$(CC) -shared $(LDFLAGS) -o $@ $< hts.dll.a $(LIBS)
 
 
@@ -357,7 +357,7 @@ cram/cram_io.o cram/cram_io.pico: cram/cram_io.c config.h os/lzma_stub.h $(cram_
 cram/cram_samtools.o cram/cram_samtools.pico: cram/cram_samtools.c config.h $(cram_h) $(htslib_sam_h) $(sam_internal_h)
 cram/cram_stats.o cram/cram_stats.pico: cram/cram_stats.c config.h $(cram_h) $(cram_os_h)
 cram/mFILE.o cram/mFILE.pico: cram/mFILE.c config.h $(htslib_hts_log_h) $(cram_os_h) cram/mFILE.h
-cram/open_trace_file.o cram/open_trace_file.pico: cram/open_trace_file.c config.h $(cram_os_h) $(cram_open_trace_file_h) $(cram_misc_h) $(htslib_hfile_h) $(htslib_hts_log_h)
+cram/open_trace_file.o cram/open_trace_file.pico: cram/open_trace_file.c config.h $(cram_os_h) $(cram_open_trace_file_h) $(cram_misc_h) $(htslib_hfile_h) $(htslib_hts_log_h) $(htslib_hts_h)
 cram/pooled_alloc.o cram/pooled_alloc.pico: cram/pooled_alloc.c config.h cram/pooled_alloc.h $(cram_misc_h)
 cram/rANS_static.o cram/rANS_static.pico: cram/rANS_static.c config.h cram/rANS_static.h cram/rANS_byte.h
 cram/string_alloc.o cram/string_alloc.pico: cram/string_alloc.c config.h cram/string_alloc.h
@@ -467,7 +467,7 @@ test/test_bgzf.o: test/test_bgzf.c config.h $(htslib_bgzf_h) $(htslib_hfile_h) $
 test/test_kstring.o: test/test_kstring.c config.h $(htslib_kstring_h)
 test/test-parse-reg.o: test/test-parse-reg.c config.h $(htslib_hts_h) $(htslib_sam_h)
 test/test_realn.o: test/test_realn.c config.h $(htslib_hts_h) $(htslib_sam_h) $(htslib_faidx_h)
-test/test-regidx.o: test/test-regidx.c config.h $(htslib_kstring_h) $(htslib_regidx_h) $(htslib_hts_defs_h)
+test/test-regidx.o: test/test-regidx.c config.h $(htslib_kstring_h) $(htslib_regidx_h) $(htslib_hts_defs_h) $(textutils_internal_h)
 test/test_str2int.o: test/test_str2int.c config.h $(textutils_internal_h)
 test/test_view.o: test/test_view.c config.h $(cram_h) $(htslib_sam_h) $(htslib_vcf_h) $(htslib_hts_log_h)
 test/test_index.o: test/test_index.c config.h $(htslib_sam_h) $(htslib_vcf_h)

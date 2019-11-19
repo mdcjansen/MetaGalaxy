@@ -1,6 +1,6 @@
 /*  hts.c -- format-neutral I/O, indexing, and iterator API functions.
 
-    Copyright (C) 2008, 2009, 2012-2017 Genome Research Ltd.
+    Copyright (C) 2008, 2009, 2012-2019 Genome Research Ltd.
     Copyright (C) 2012, 2013 Broad Institute.
 
     Author: Heng Li <lh3@sanger.ac.uk>
@@ -3037,7 +3037,7 @@ const char *hts_parse_region(const char *s, int *tid, hts_pos_t *beg,
     char *hyphen;
     *beg = hts_parse_decimal(colon+1, &hyphen, flags) - 1;
     if (*beg < 0) {
-        if (isdigit(*hyphen) || *hyphen == '\0' || *hyphen == ',') {
+        if (isdigit_c(*hyphen) || *hyphen == '\0' || *hyphen == ',') {
             // interpret chr:-100 as chr:1-100
             *end = *beg==-1 ? HTS_POS_MAX : -(*beg+1);
             *beg = 0;

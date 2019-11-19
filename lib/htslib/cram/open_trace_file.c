@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 /*
-Copyright (c) 2008, 2009, 2013, 2014 Genome Research Ltd.
+Copyright (c) 2008, 2009, 2013, 2014-2015, 2018-2019 Genome Research Ltd.
 Author: James Bonfield <jkb@sanger.ac.uk>
 
 Redistribution and use in source and binary forms, with or without
@@ -81,6 +81,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "cram/misc.h"
 #include "htslib/hfile.h"
 #include "htslib/hts_log.h"
+#include "htslib/hts.h"
 
 /*
  * Returns whether the path refers to a regular file.
@@ -107,11 +108,7 @@ char *tokenise_search_path(const char *searchpath) {
     char *newsearch;
     unsigned int i, j;
     size_t len;
-#if defined(_WIN32) || defined(__MSYS__)
-    char path_sep = ';';
-#else
-    char path_sep = ':';
-#endif
+    char path_sep = HTS_PATH_SEPARATOR_CHAR;
 
     if (!searchpath)
         searchpath="";

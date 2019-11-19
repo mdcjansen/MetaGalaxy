@@ -1,0 +1,22 @@
+.dockerignore
+Dockerfile
+#.git*
+bitbucket*.yml
+metabat
+metabat1
+metabat2
+jgi_summarize_bam_contig_depths
+contigOverlaps
+*.o
+.sconsign.dblite
+build/
+samtools*
+/include/
+/lib/
+bin
+/.autotools
+/.cproject
+.settings
+/.project
+/.pydevproject
+/Build (GNU)/
