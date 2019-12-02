@@ -1,9 +1,9 @@
 if __name__ == "__main__":
 	programm= "kraken2"
-	print("kraken2 is running.")
 	os.system("mkdir "+outdir+"/taxonomy_raw_reads")
 	ntname= "Preliminary_Taxonomy_ndb.txt"
 	command= lib+"/"+programm+"/kraken2 --db "+data+"/kraken2_ndb --threads "+threads+" --output "+outdir+"/taxonomy_values_ndb.txt --report "+outdir+"/"+ntname+" "+infile
+	logging.info("Classifying taxonomy of raw reads with a nucleotide database (NDB)")
 	run(command)
 	ngname= "Preliminary_Taxonomy_Genus_ndb.txt"
 	nsname= "Preliminary_Taxonomy_Species_ndb.txt"
@@ -21,7 +21,9 @@ if __name__ == "__main__":
 		file= file.read().replace(" ", "")
 		with open(outdir+"/taxonomy_raw_reads/taxonomy_raw-reads_species_ndb.txt", "w+") as output:
 			output.write(file)
+	logging.info("raw reads have been taxonomically classified (NDB)")
 	command= lib+"/Krona/KronaTools/bin/ktImportTaxonomy -q 2 -t 3 -k -o "+outdir+"/taxonomy_chart_raw-reads_ndb.html "+outdir+"/taxonomy_values_ndb.txt"
-	os.system(command)
+	logging.info("Visualising taxonomy of raw reads from nucleotide database")
+	run(command)
 
 
