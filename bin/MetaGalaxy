@@ -37,34 +37,6 @@ def valid(infile):
 			sys.exit(1)
 	return
 
-def exist(outdir):
-	if os.path.exists(outdir) == True:
-		logging.info("MetaGalaxy initiated")
-		print("\nOutput directory already exists, do you want to clear the contents of the directory?")
-		logging.info("Output directory already exists, do you want to clear the contents of the directory?")
-		answer= input("[y/n]\n")
-		if answer == "y" or answer == "yes":
-			logging.info("Answer: Yes")
-			print("\nClearing directory...", end="\r")
-			logging.info("Clearing directory...")
-			os.chdir(outdir)
-			os.system("find . ! -name 'MetaGalaxy.log' -type d -exec rm -rf {} +")
-			print("Output directory has been cleared.\n")
-			logging.info("Output directory has been cleared")
-		elif answer == "n" or answer == "no":
-			print("\nDirectory will not be cleared. Analyses resuming.\nNOTE: Existing data might be overwritten!\n")
-			logging.warning("Directory will not be cleared. Analyses resuming.\nNOTE: Existing data might be overwritten!")
-		else:
-			print("\nUnknown input. Please provide a valid input (y/yes - n/no). Exiting MetaGalaxy\n")
-			logging.error("Unknown input. Please provide a valid input (y/yes - n/no). Exiting MetaGalaxy")
-			sys.exit(1)
-	elif os.path.exists(outdir) == False:
-		os.mkdir(outdir)
-		print("Output directory %s has been created\n" % outdir)
-		logging.info("MetaGalaxy initiated")
-		logging.info("Output directory "+outdir+" has been created")
-	return
-
 def run(command):
 	start= time.time()
 	with printblock():
@@ -157,7 +129,8 @@ if __name__ == "__main__":
 			print("\nClearing directory...", end="\r")
 			logging.info("Clearing directory...")
 			os.chdir(outdir)
-			os.system("find . ! -name 'MetaGalaxy.log' -type d -exec rm -rf {} +")
+			os.system("find . ! -name 'MetaGalaxy.log' ! -name '.' -type d -exec rm -rf {} +")
+			os.system("find . ! -name 'MetaGalaxy.log' ! -name '.' ! -type d -exec rm -rf {} +")
 			print("Output directory has been cleared.\n")
 			logging.info("Output directory has been cleared")
 		elif answer == "n" or answer == "no":
@@ -180,6 +153,7 @@ if __name__ == "__main__":
 	keep= argument.keep
 	if demultiplex == True:
 		indir= os.path.abspath(argument.i)
+		logging.info("Settings MetaGalaxy:\n\nInput directory:\t\t"+indir+"\nOutput directory:\t"+outdir+"\nThreads:\t\t"+threads+"\n")
 		exec(open(bin+"/MG_DMP.py").read());
 		sys.exit(0)
 	valid(infile)
