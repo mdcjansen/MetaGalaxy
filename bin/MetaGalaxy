@@ -82,8 +82,8 @@ def tbts():
 
 if __name__ == "__main__":
 	__author__= "M.D.C. Jansen"
-	__version__= "MetaGalaxy v1.4.0"
-	__date__= "21st of November, 2019"
+	__version__= "MetaGalaxy v1.6.2"
+	__date__= "4th of December, 2019"
 	done= False
 	ttime= time.time()
 	parser= argparse.ArgumentParser(prog="MetaGalaxy", description="MetaGalaxy is designed to identify bacteria from metagenomic samples and detect their AMR genes. It uses basecalled nanopore data in fastq format. Ensure that the conda environment is activated before using this pipeline [conda activate metagalaxy]. ", usage="%(prog)s -i <inputfile> [options]", epilog= "Thank you for using MetaGalaxy!")
