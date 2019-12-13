@@ -27,11 +27,11 @@ A pipeline for metagenomic assembly and analysis, which can be used on Galaxy
 
 ## Installation
 
-Installation of the tools in the /lib/ folder has not been properly tested yet and thus the install.sh file might not work
+Installation of the tools in the lib/ folder has not been properly tested yet and thus the install.sh file might not work
 
 Install dependecies:
 ```
-sudo apt-get install -y build-essential git qtbase5-dev libqt5svg5-dev libboost-all-dev curl libncurses5-dev zlib1g-dev pkg-config libfreetype6-dev libpng-dev cmake gcc g++ libbz2-dev liblzma-dev autoconf python-setuptools mummer
+sudo apt-get install -y build-essential git qtbase5-dev libqt5svg5-dev libboost-all-dev curl libncurses5-dev zlib1g-dev pkg-config libfreetype6-dev libpng-dev cmake gcc g++ libbz2-dev liblzma-dev autoconf python-setuptools
 ```
 
 Install MetaGalaxy:
@@ -40,6 +40,17 @@ git clone https://github.com/mdcjansen/MetaGalaxy
 cd path/to/MetaGalaxy
 conda env create -f environment.yml
 ```
+
+Install the tools:
+```
+lib/install.sh
+```
+
+Install the databases:
+```
+data/install.sh
+```
+It is possible to create your own databases for the tool as long as the folder structure is the same as the default folder structure of the tool.
 
 Make MetaGalaxy executable from anywhere:
 ```
@@ -145,9 +156,9 @@ The files look like this:
 
 Coverage in Percentage|Covered fragments|Assigned fragments|Rank code|NCBI ID|Scientific name
 --- | --- | --- | --- | --- | ---
-19.16|622682|38720|G|1386|Bacillus
-11.05|359080|16452|G|12766|Staphylococcus
-7.65|248513|1866|G|1578|Lactobacillus
+86.62|1120718|2668|G|561|Escherichia
+3.85|49777|14|G|1350|Enterococcus
+6.50|84085|0|G|9605|Homo
 
 Where the percentage is the percentage of fragments covered by the clade at the specific taxon, and the covered fragments are the number of fragments covered by the clade. The assigned fragments are the number of fragments directly assigned to the taxon. The rank code specifies the taxonomic rank. The NCBI ID is the NCBI taxonomic ID number.
 
@@ -177,9 +188,24 @@ Individual bins are taxonomically classified and summarized by CAT/BAT. The summ
 
 bin|classification|reason|lineage|lineage scores|superkingdom|phylum|class|order|family|genus|species
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-bin.1.fa|classified|based on 95/95 ORFs|1;131567;2;1224;1236;72274|1.00;0.97;0.94;0.73;0.67;0.32;|Bacteria|Proteobacteria|Gammaproteobacteria|Pseudomonadales|not classified|not classified|not classified
-bin.2.fa|classified|based on 95/95 ORFs|1;131567;2;1224;1236;72274|1.00;0.97;0.94;0.73;0.67;0.32;|Bacteria|Proteobacteria|Gammaproteobacteria|Pseudomonadales|not classified|not classified|not classified
-bin.3.fa|classified|based on 95/95 ORFs|1;131567;2;1224;1236;72274|1.00;0.97;0.94;0.73;0.67;0.32;|Bacteria|Proteobacteria|Gammaproteobacteria|Pseudomonadales|not classified|not classified|not classified
+bin.1.fa|classified|based on 5466/5482 ORFs|1;131567;2;1224;1236;91347;543;561;562|1.00;0.93;0.81;0.25;0.21;0.20;0.20;0.10;0.08|Bacteria: 0.81|Proteobacteria: 0.25|Gammaproteobacteria: 0.21|Enterobacterales: 0.20|Enterobacteriaceae: 0.20|Escherichia: 0.10|Escherichia coli: 0.08
+bin.2.fa|classified|based on 4014/4056 ORFs|1;131567;2;1783272;1239;91061;186826;81852;1350;1351|1.00;1.00;0.99;0.11;0.08;0.08;0.07;0.07;0.07;0.05|Bacteria: 0.99|Firmicutes: 0.08|Bacilli: 0.08|Lactobacillales: 0.07|Enterococcaceae: 0.07|Enterococcus: 0.07|Enterococcus faecalis: 0.05
+bin.lowDepth.fa|classified(1/4)|based on 407/453 ORFs|1;131567;2;1783270;68336;976;200643;171549;171551;836;2645799;1739529|1.00;1.00;1.00;0.24;0.24;0.24;0.24;0.24;0.22;0.21;0.06;0.06|Bacteria: 1.00|Bacteroidetes: 0.24|Bacteroidia: 0.24|Bacteroidales: 0.24|Porphyromonadaceae: 0.22|Porphyromonas: 0.21|Porphyromonas sp. HMSC077F02: 0.06
+bin.lowDepth.fa|classified(2/4)|based on 407/453 ORFs|1;131567;2;1783272;1239;91061;186826;186827;66831;137730|1.00;1.00;1.00;0.39;0.35;0.35;0.35;0.34;0.33;0.33|Bacteria: 1.00	Firmicutes: 0.35|Bacilli: 0.35|Lactobacillales: 0.35|Aerococcaceae: 0.34|Facklamia: 0.33|Facklamia ignava: 0.33
+bin.lowDepth.fa|classified(3/4)|based on 407/453 ORFs|1;131567;2;1224;68525;29547;213849;72294;194;827|1.00;1.00;1.00;0.16;0.16;0.16;0.16;0.15;0.15;0.14|Bacteria: 1.00	Proteobacteria: 0.16|Epsilonproteobacteria: 0.16|Campylobacterales: 0.16|Campylobacteraceae: 0.15|Campylobacter: 0.15|Campylobacter ureolyticus: 0.14
+bin.lowDepth.fa|classified(4/4)|based on 407/453 ORFs|1;131567;2;1783272;201174;1760;2037;2049;1069494|1.00;1.00;1.00;0.39;0.03;0.03;0.03;0.03;0.03|Bacteria: 1.00|Actinobacteria: 0.03|Actinobacteria: 0.03|Actinomycetales: 0.03|Actinomycetaceae: 0.03|Trueperella: 0.03|not classified
+bin.tooShort.fa|classified|based on 2/4 ORFs|1;131567;2759;33630;5794;422676;5819;1639119;5820;418103;36330;864142|1.00;1.00;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52|Eukaryota: 0.52|Apicomplexa: 0.52|Aconoidasida: 0.52|Haemosporida: 0.52|Plasmodiidae: 0.52|Plasmodium: 0.52|Plasmodium ovale: 0.52
+bin.unbinned.fa|classified(1/11)|based on 348/400 ORFs|1;131567;2759;33630;5794;422676;5819;1639119;5820;418103;36330;864142|1.00;0.82;0.03;0.02;0.02;0.02;0.02;0.02;0.02;0.02;0.02;0.02|Eukaryota: 0.03|Apicomplexa: 0.02|Aconoidasida: 0.02|Haemosporida: 0.02|Plasmodiidae: 0.02|Plasmodium: 0.02|Plasmodium ovale: 0.02
+bin.unbinned.fa|classified(2/11)|based on 348/400 ORFs|1;131567;2;1783272;201174;1760;2037;2049;1069494;59561|1.00;0.82;0.76;0.46;0.18;0.18;0.13;0.13;0.13;0.03|Bacteria: 0.76|Actinobacteria: 0.18|Actinobacteria: 0.18|Actinomycetales: 0.13|Actinomycetaceae: 0.13|Trueperella: 0.13|Trueperella bernardiae: 0.03
+bin.unbinned.fa|classified(3/11)|based on 348/400 ORFs|1;131567;2;1783272;201174;1760;85009;31957;203133;33012|1.00;0.82;0.76;0.46;0.18;0.18;0.04;0.04;0.04;0.04|Bacteria: 0.76|Actinobacteria: 0.18|Actinobacteria: 0.18|Propionibacteriales: 0.04|Propionibacteriaceae: 0.04|Propionimicrobium: 0.04|Propionimicrobium lymphophilum: 0.04
+bin.unbinned.fa|classified(4/11)|based on 348/400 ORFs|1;131567;2;1783272;1239;91061;186826;186827;66831;137730|1.00;0.82;0.76;0.46;0.28;0.16;0.16;0.14;0.13;0.12|Bacteria: 0.76|Firmicutes: 0.28|Bacilli: 0.16|Lactobacillales: 0.16|Aerococcaceae: 0.14|Facklamia: 0.13|Facklamia ignava: 0.12
+bin.unbinned.fa|classified(5/11)|based on 348/400 ORFs|1;131567;2;1783257;204428;204429;51291;809;1113537;810*|1.00;0.82;0.76;0.01;0.01;0.01;0.01;0.01;0.01;0.01|Bacteria: 0.76|Chlamydiae: 0.01|Chlamydiia: 0.01|Chlamydiales: 0.01|Chlamydiaceae: 0.01|Chlamydia*: 0.01|not classified
+bin.unbinned.fa|classified(6/11)|based on 348/400 ORFs|1;131567;2;1783270;68336;976;200643;171549;171551;836|1.00;0.82;0.76;0.04;0.04;0.04;0.04;0.04;0.02;0.01|Bacteria: 0.76|Bacteroidetes: 0.04|Bacteroidia: 0.04|Bacteroidales: 0.04|Porphyromonadaceae: 0.02|Porphyromonas: 0.01|not classified
+bin.unbinned.fa|classified(7/11)|based on 348/400 ORFs|1;131567;2;1783272;1239;1737404;1737405;1570339;165779;33032|1.00;0.82;0.76;0.46;0.28;0.08;0.08;0.08;0.07;0.07|Bacteria: 0.76|Firmicutes: 0.28|Tissierellia: 0.08|Tissierellales: 0.08|Peptoniphilaceae: 0.08|Anaerococcus: 0.07|Anaerococcus lactolyticus: 0.07
+bin.unbinned.fa|classified(8/11)|based on 348/400 ORFs|1;131567;2;1224;68525;29547;213849;72294;194|1.00;0.82;0.76;0.13;0.02;0.02;0.02;0.02;0.02|Bacteria: 0.76|Proteobacteria: 0.13|Epsilonproteobacteria: 0.02|Campylobacterales: 0.02|Campylobacteraceae: 0.02|Campylobacter: 0.02|not classified
+bin.unbinned.fa|classified(9/11)|based on 348/400 ORFs|1;131567;2;1224;1236;91347;543;590;28901|1.00;0.82;0.76;0.13;0.10;0.09;0.07;0.03;0.03|Bacteria: 0.76|Proteobacteria: 0.13|Gammaproteobacteria: 0.10|Enterobacterales: 0.09|Enterobacteriaceae: 0.07|Salmonella: 0.03|Salmonella enterica: 0.03
+bin.unbinned.fa|classified(10/11)|based on 348/400 ORFs|1;131567;2;1224;1236;91347;543;561;562|1.00;0.82;0.76;0.13;0.10;0.09;0.07;0.02;0.02|Bacteria: 0.76|Proteobacteria: 0.13|Gammaproteobacteria: 0.10|Enterobacterales: 0.09|Enterobacteriaceae: 0.07|Escherichia: 0.02|Escherichia coli: 0.02
+bin.unbinned.fa|classified(11/11)|based on 348/400 ORFs|1;131567;2759;33154;33208;6072;33213|1.00;0.82;0.03;0.01;0.01;0.01;0.01|Eukaryota: 0.03|not classified|not classified|not classified|not classified|not classified|not classified
 
 Aside from the tab-delimited file, a Krona chart is created from the taxonomic assignment. The chart shows which organisms have been identified across all the bins. The abundance of the organisms is displayed in percentage
 
@@ -188,8 +214,12 @@ The first file looks like this:
 
 FILE|SEQUENCE|START|END|STRAND|GENE|COVERAGE|COVERAGE_MAP|GAPS|%COVERAGE|%IDENTITY|DATABASE|ACCESSION|PRODUCT|RESISTANCE
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-bin.1.fa|contig_9:1.0-2781286.0|1400259|1401757|+|Isa(A)\_1|1-1497/1497|========/======|2/2|100|99.13|resfinder|AY225127|Isa(A)|Lincomycin;Clindamycin;Dalfopristin;Pristinamycin\_IIA;Virginiamycin\_M
-bin.2.fa|contig_11:0.1-4689483.0|6351|7584|-|mdf(A)\_A|1-1233/1233|========/======|1/1|100|97.89|resfinder|YO8743|mdf(A)|
+bin.1.fa|contig_2:1.0-4689146.0|6346|7578|-|mdf(A)_1|1-1233/1233|===============|0/0|100.00|97.97|resfinder|Y08743|mdf(A)	
+bin.1.fa|contig_2:1.0-4689146.0|549616|549971|-|tet(34)_1|66-421/465|.=======/=====.|2/2|76.34|74.79|resfinder|AB061440|tet(34)	
+bin.1.fa|contig_2:1.0-4689146.0|1096532|1097632|+|blaCFE-1_1|37-1146/1146|========/======|5/19|95.64|71.66|resfinder|AB107899|blaCFE-1	
+bin.1.fa|contig_2:1.0-4689146.0|3007312|3007616|-|oqxB_1|2660-2964/3153|......../...===|2/6|9.58|68.18|resfinder|EU370913|oqxB|Nalidixic_acid;Ciprofloxacin
+bin.2.fa|contig_18:1.0-2132224.0|101057|102558|+|lsa(A)_1|1-1497/1497|========/======|5/5|100.00|98.94|resfinder|AY225127|lsa(A)|Lincomycin;Clindamycin;Dalfopristin;Pristinamycin_IIA;Virginiamycin_M
+bin.2.fa|contig_18:1.0-2132224.0|855358|855596|+\tetB(60)_1|1444-1682/1740|......../...===|8/16|13.28|71.66|resfinder|KX000273|tetB(60)|Doxycycline;Tetracycline;Tigecycline
 
 With each of the columns displaying this information:
 1. The name of the bin
@@ -212,10 +242,10 @@ With each of the columns displaying this information:
 
 The summary file, summarises all found genes into a single file, which looks like this:
 
-FILE|NUM_FOUND|lsa(A)\_1|mdf(A)\_1
---- | --- | ---| ---
-bin.1.fa|1|100.00|.
-bin.2.fa|1|.|100.00
+FILE|NUM_FOUND|blaCFE-1_1|lsa(A)_1|mdf(A)_1|oqxB_1|tet(34)_1|tetB(60)_1
+--- | --- | --- | --- | --- | --- | --- | ---
+bin.1.fa|4|95.64|.|100.00|9.58|76.34|.
+bin.2.fa|2|.|100.00	||.|.|13.28
 
 Where the first column displays the name of the bin; the second column displays how many amr genes were found in a specific bin; and all following columns display the coverage of each amr gene found in a bin in percentage. When a bin does not contain a specific amr gene, a "." is placed in that cell.
 

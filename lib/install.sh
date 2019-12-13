@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 git clone https://github.com/rrwick/Filtlong
 git clone https://github.com/fenderglass/Flye
 git clone https://github.com/samtools/htslib
@@ -9,6 +9,7 @@ git clone https://github.com/lh3/minimap2
 git clone https://github.com/matsen/pplacer
 git clone https://github.com/hyattpd/Prodigal
 git clone https://github.com/ablab/quast
+git clone https://github.com/dutilh/CAT
 wget https://github.com/bbuchfink/diamond/releases/download/v0.9.29/diamond-linux64.tar.gz
 wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
 wget https://github.com/rrwick/Bandage/releases/download/v0.8.1/Bandage_Ubuntu_static_v0_8_1.zip
@@ -18,6 +19,8 @@ mv diamond* ./diamond
 tar xzvf master.tar.gz
 mv berkeleylab-metabat* ./metabat
 mv quast ./Quast
+mv CAT/CAT_PACK CAT/CAT
+rm *.gz *.zip *.pdf
 cd Filtlong
 make -j
 cd ../Flye
@@ -37,6 +40,7 @@ make install --prefix=$(pwd)
 cd ../kraken2
 ./install_kraken2.sh ./
 cd ../Krona/KronaTools
+mkdir taxonomy
 ./install.pl --prefix ./
 ./updateTaxonomy.sh
 ./undateAccessions.sh
