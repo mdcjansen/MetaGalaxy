@@ -27,8 +27,6 @@ A pipeline for metagenomic assembly and analysis, which can be used on Galaxy
 
 ## Installation
 
-Installation of the tools in the lib/ folder has not been properly tested yet and thus the install.sh file might not work
-
 Install dependecies:
 ```
 sudo apt-get install -y build-essential git qtbase5-dev libqt5svg5-dev libboost-all-dev curl libncurses5-dev zlib1g-dev pkg-config libfreetype6-dev libpng-dev cmake gcc g++ libbz2-dev liblzma-dev autoconf python-setuptools
@@ -51,10 +49,11 @@ Install the databases:
 data/install.sh
 ```
 It is possible to create your own databases for the tool as long as the folder structure is the same as the default folder structure of the tool.
+Building the databases may take several hours depending on the system configuration
 
 Make MetaGalaxy executable from anywhere:
 ```
-sudo ln -s path/to/Metagalaxy/bin/MetaGalaxy /usr/local/bin/MetaGalaxy
+sudo ln -s path/to/Metagalaxy/bin/MetaGalaxy.py /usr/local/bin/MetaGalaxy
 ```
 
 ## Example commands
@@ -195,17 +194,6 @@ bin.lowDepth.fa|classified(2/4)|based on 407/453 ORFs|1;131567;2;1783272;1239;91
 bin.lowDepth.fa|classified(3/4)|based on 407/453 ORFs|1;131567;2;1224;68525;29547;213849;72294;194;827|1.00;1.00;1.00;0.16;0.16;0.16;0.16;0.15;0.15;0.14|Bacteria: 1.00	Proteobacteria: 0.16|Epsilonproteobacteria: 0.16|Campylobacterales: 0.16|Campylobacteraceae: 0.15|Campylobacter: 0.15|Campylobacter ureolyticus: 0.14
 bin.lowDepth.fa|classified(4/4)|based on 407/453 ORFs|1;131567;2;1783272;201174;1760;2037;2049;1069494|1.00;1.00;1.00;0.39;0.03;0.03;0.03;0.03;0.03|Bacteria: 1.00|Actinobacteria: 0.03|Actinobacteria: 0.03|Actinomycetales: 0.03|Actinomycetaceae: 0.03|Trueperella: 0.03|not classified
 bin.tooShort.fa|classified|based on 2/4 ORFs|1;131567;2759;33630;5794;422676;5819;1639119;5820;418103;36330;864142|1.00;1.00;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52;0.52|Eukaryota: 0.52|Apicomplexa: 0.52|Aconoidasida: 0.52|Haemosporida: 0.52|Plasmodiidae: 0.52|Plasmodium: 0.52|Plasmodium ovale: 0.52
-bin.unbinned.fa|classified(1/11)|based on 348/400 ORFs|1;131567;2759;33630;5794;422676;5819;1639119;5820;418103;36330;864142|1.00;0.82;0.03;0.02;0.02;0.02;0.02;0.02;0.02;0.02;0.02;0.02|Eukaryota: 0.03|Apicomplexa: 0.02|Aconoidasida: 0.02|Haemosporida: 0.02|Plasmodiidae: 0.02|Plasmodium: 0.02|Plasmodium ovale: 0.02
-bin.unbinned.fa|classified(2/11)|based on 348/400 ORFs|1;131567;2;1783272;201174;1760;2037;2049;1069494;59561|1.00;0.82;0.76;0.46;0.18;0.18;0.13;0.13;0.13;0.03|Bacteria: 0.76|Actinobacteria: 0.18|Actinobacteria: 0.18|Actinomycetales: 0.13|Actinomycetaceae: 0.13|Trueperella: 0.13|Trueperella bernardiae: 0.03
-bin.unbinned.fa|classified(3/11)|based on 348/400 ORFs|1;131567;2;1783272;201174;1760;85009;31957;203133;33012|1.00;0.82;0.76;0.46;0.18;0.18;0.04;0.04;0.04;0.04|Bacteria: 0.76|Actinobacteria: 0.18|Actinobacteria: 0.18|Propionibacteriales: 0.04|Propionibacteriaceae: 0.04|Propionimicrobium: 0.04|Propionimicrobium lymphophilum: 0.04
-bin.unbinned.fa|classified(4/11)|based on 348/400 ORFs|1;131567;2;1783272;1239;91061;186826;186827;66831;137730|1.00;0.82;0.76;0.46;0.28;0.16;0.16;0.14;0.13;0.12|Bacteria: 0.76|Firmicutes: 0.28|Bacilli: 0.16|Lactobacillales: 0.16|Aerococcaceae: 0.14|Facklamia: 0.13|Facklamia ignava: 0.12
-bin.unbinned.fa|classified(5/11)|based on 348/400 ORFs|1;131567;2;1783257;204428;204429;51291;809;1113537;810*|1.00;0.82;0.76;0.01;0.01;0.01;0.01;0.01;0.01;0.01|Bacteria: 0.76|Chlamydiae: 0.01|Chlamydiia: 0.01|Chlamydiales: 0.01|Chlamydiaceae: 0.01|Chlamydia*: 0.01|not classified
-bin.unbinned.fa|classified(6/11)|based on 348/400 ORFs|1;131567;2;1783270;68336;976;200643;171549;171551;836|1.00;0.82;0.76;0.04;0.04;0.04;0.04;0.04;0.02;0.01|Bacteria: 0.76|Bacteroidetes: 0.04|Bacteroidia: 0.04|Bacteroidales: 0.04|Porphyromonadaceae: 0.02|Porphyromonas: 0.01|not classified
-bin.unbinned.fa|classified(7/11)|based on 348/400 ORFs|1;131567;2;1783272;1239;1737404;1737405;1570339;165779;33032|1.00;0.82;0.76;0.46;0.28;0.08;0.08;0.08;0.07;0.07|Bacteria: 0.76|Firmicutes: 0.28|Tissierellia: 0.08|Tissierellales: 0.08|Peptoniphilaceae: 0.08|Anaerococcus: 0.07|Anaerococcus lactolyticus: 0.07
-bin.unbinned.fa|classified(8/11)|based on 348/400 ORFs|1;131567;2;1224;68525;29547;213849;72294;194|1.00;0.82;0.76;0.13;0.02;0.02;0.02;0.02;0.02|Bacteria: 0.76|Proteobacteria: 0.13|Epsilonproteobacteria: 0.02|Campylobacterales: 0.02|Campylobacteraceae: 0.02|Campylobacter: 0.02|not classified
-bin.unbinned.fa|classified(9/11)|based on 348/400 ORFs|1;131567;2;1224;1236;91347;543;590;28901|1.00;0.82;0.76;0.13;0.10;0.09;0.07;0.03;0.03|Bacteria: 0.76|Proteobacteria: 0.13|Gammaproteobacteria: 0.10|Enterobacterales: 0.09|Enterobacteriaceae: 0.07|Salmonella: 0.03|Salmonella enterica: 0.03
-bin.unbinned.fa|classified(10/11)|based on 348/400 ORFs|1;131567;2;1224;1236;91347;543;561;562|1.00;0.82;0.76;0.13;0.10;0.09;0.07;0.02;0.02|Bacteria: 0.76|Proteobacteria: 0.13|Gammaproteobacteria: 0.10|Enterobacterales: 0.09|Enterobacteriaceae: 0.07|Escherichia: 0.02|Escherichia coli: 0.02
-bin.unbinned.fa|classified(11/11)|based on 348/400 ORFs|1;131567;2759;33154;33208;6072;33213|1.00;0.82;0.03;0.01;0.01;0.01;0.01|Eukaryota: 0.03|not classified|not classified|not classified|not classified|not classified|not classified
 
 Aside from the tab-delimited file, a Krona chart is created from the taxonomic assignment. The chart shows which organisms have been identified across all the bins. The abundance of the organisms is displayed in percentage
 
@@ -219,7 +207,7 @@ bin.1.fa|contig_2:1.0-4689146.0|549616|549971|-|tet(34)_1|66-421/465|.=======/==
 bin.1.fa|contig_2:1.0-4689146.0|1096532|1097632|+|blaCFE-1_1|37-1146/1146|========/======|5/19|95.64|71.66|resfinder|AB107899|blaCFE-1	
 bin.1.fa|contig_2:1.0-4689146.0|3007312|3007616|-|oqxB_1|2660-2964/3153|......../...===|2/6|9.58|68.18|resfinder|EU370913|oqxB|Nalidixic_acid;Ciprofloxacin
 bin.2.fa|contig_18:1.0-2132224.0|101057|102558|+|lsa(A)_1|1-1497/1497|========/======|5/5|100.00|98.94|resfinder|AY225127|lsa(A)|Lincomycin;Clindamycin;Dalfopristin;Pristinamycin_IIA;Virginiamycin_M
-bin.2.fa|contig_18:1.0-2132224.0|855358|855596|+\tetB(60)_1|1444-1682/1740|......../...===|8/16|13.28|71.66|resfinder|KX000273|tetB(60)|Doxycycline;Tetracycline;Tigecycline
+bin.2.fa|contig_18:1.0-2132224.0|855358|855596|+|tetB(60)_1|1444-1682/1740|......../...===|8/16|13.28|71.66|resfinder|KX000273|tetB(60)|Doxycycline;Tetracycline;Tigecycline
 
 With each of the columns displaying this information:
 1. The name of the bin
@@ -253,28 +241,29 @@ Where the first column displays the name of the bin; the second column displays 
 ## Acknowledgements
 
 Metagalaxy uses the following tools in the pipeline:
-* [Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/GPB_2003_v1_revM_14Dec2018)
-* [NanoPlot](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty149/4934939)
-* [Kraken2](http://genomebiology.com/2014/15/3/R46)
-* [Filtlong](https://github.com/rrwick/Filtlong)
-* [Flye](https://doi.org/10.1038/s41587-019-0072-8)
-* [Racon](https://github.com/lbcb-sci/racon)
-* [Medaka](https://github.com/nanoporetech/medaka)
-* [Quast](http://bioinformatics.oxfordjournals.org/content/29/8/1072.abstract?keytype=ref&ijkey=Kzq9lhMayiqecq9)
-* [Bandage](http://bioinformatics.oxfordjournals.org/content/31/20/3350)
-* [metaBAT](https://bitbucket.org/berkeleylab/metabat/src/master/)
 * [ABRicate](https://github.com/tseemann/abricate)
 	* [Resfinder database](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
+	* [PlasmidFinder database] (https://www.ncbi.nlm.nih.gov/pubmed/24777092)
+* [Bandage](http://bioinformatics.oxfordjournals.org/content/31/20/3350)
+* [BLAST](https://doi.org/10.1186/1471-2105-10-421)
 * [CAT/BAT](https://github.com/sharkdp/bat)
-* [Krona](http://www.ncbi.nlm.nih.gov/pubmed/21961884)
-* [Minimap2](https://doi.org/10.1093/bioinformatics/bty191)
-* [Samtools](http://www.ncbi.nlm.nih.gov/pubmed/19505943)
-* [pplacer](https://github.com/matsen/pplacer)
-* [Prodigal](https://github.com/hyattpd/Prodigal)
 * [DIAMOND](https://doi.org/10.1038/nmeth.3176)
+* [Filtlong](https://github.com/rrwick/Filtlong)
+* [Flye](https://doi.org/10.1038/s41587-019-0072-8)
+* [Guppy](https://community.nanoporetech.com/protocols/Guppy-protocol/v/GPB_2003_v1_revM_14Dec2018)
 * [Hmmer](http://nar.oxfordjournals.org/content/41/12/e121.long)
 * [htslib](https://github.com/samtools/htslib)
-* [BLAST](https://doi.org/10.1186/1471-2105-10-421)
+* [Kraken2](http://genomebiology.com/2014/15/3/R46)
+* [Krona](http://www.ncbi.nlm.nih.gov/pubmed/21961884)
+* [Medaka](https://github.com/nanoporetech/medaka)
+* [metaBAT](https://bitbucket.org/berkeleylab/metabat/src/master/)
+* [Minimap2](https://doi.org/10.1093/bioinformatics/bty191)
+* [NanoPlot](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty149/4934939)
+* [pplacer](https://github.com/matsen/pplacer)
+* [Prodigal](https://github.com/hyattpd/Prodigal)
+* [Quast](http://bioinformatics.oxfordjournals.org/content/29/8/1072.abstract?keytype=ref&ijkey=Kzq9lhMayiqecq9)
+* [Racon](https://github.com/lbcb-sci/racon)
+* [Samtools](http://www.ncbi.nlm.nih.gov/pubmed/19505943)
 
 
 ## License
