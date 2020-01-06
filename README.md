@@ -243,7 +243,7 @@ Where the first column displays the name of the bin; the second column displays 
 Metagalaxy uses the following tools in the pipeline:
 * [ABRicate](https://github.com/tseemann/abricate)
 	* [Resfinder database](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
-	* [PlasmidFinder database] (https://www.ncbi.nlm.nih.gov/pubmed/24777092)
+	* [PlasmidFinder database](https://www.ncbi.nlm.nih.gov/pubmed/24777092)
 * [Bandage](http://bioinformatics.oxfordjournals.org/content/31/20/3350)
 * [BLAST](https://doi.org/10.1186/1471-2105-10-421)
 * [CAT/BAT](https://github.com/sharkdp/bat)
