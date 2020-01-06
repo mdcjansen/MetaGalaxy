@@ -1,6 +1,8 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
-import sys, os, glob, argparse, time, datetime, itertools, threading, subprocess, logging
+import sys, os, glob, argparse, time, datetime, multiprocessing, threading, subprocess, logging
+from Bio import SeqIO
+from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
 class printblock:
 	def __init__(self, *args, **kw):
@@ -20,12 +22,18 @@ class printblock:
 		sys.stdout.flush()
 		os.dup2(self._oldstdout_fno, 1)
 
+def use_threads(thread_count):
+	if multiprocessing.cpu_count() > thread_count:
+		return thread_count
+	else:
+		return multiprocessing.cpu_count()
+
 def valid(infile):
 	input= glob.glob(infile)
 	input= ''.join(infile)
 	if len(infile) == 0:
 		print("\nNo input file found. Exiting MetaGalaxy\n")
-		logging.warning("No input file found. Exiting MetaGalaxy")
+		logging.warning("No input file found. Exiting MetaGalaxy\n\n")
 		sys.exit(1)
 	elif len(infile) != 0:
 		if os.path.exists(infile) == True:
@@ -33,7 +41,7 @@ def valid(infile):
 			logging.info("Found file: "+fname)
 		elif os.path.exists(infile) == False:
 			print("\nNo input file found. Exiting MetaGalaxy.\n")
-			logging.error("No input file found. Exiting MetaGalaxy")
+			logging.error("No input file found. Exiting MetaGalaxy\n\n")
 			sys.exit(1)
 	return
 
@@ -82,8 +90,8 @@ def tbts():
 
 if __name__ == "__main__":
 	__author__= "M.D.C. Jansen"
-	__version__= "MetaGalaxy v1.7"
-	__date__= "13th of December, 2019"
+	__version__= "MetaGalaxy v1.4.0"
+	__date__= "21st of November, 2019"
 	done= False
 	ttime= time.time()
 	parser= argparse.ArgumentParser(prog="MetaGalaxy", description="MetaGalaxy is designed to identify bacteria from metagenomic samples and detect their AMR genes. It uses basecalled nanopore data in fastq format. Ensure that the conda environment is activated before using this pipeline [conda activate metagalaxy]. ", usage="%(prog)s -i <inputfile> [options]", epilog= "Thank you for using MetaGalaxy!")
@@ -91,7 +99,7 @@ if __name__ == "__main__":
 	parser.add_argument("-v", "--version", help= "Prints program version and exits Metagalaxy", action= "version", version= __version__+" "+__date__+" by "+__author__)
 	parser.add_argument("-i", metavar= "[input]", help= "Input .fastq file for analysis or file directory for demultiplexing", required= False)
 	parser.add_argument("-o", metavar= "[output]", help= "Output directory", required= False, default= "Metagalaxy_output/")
-	parser.add_argument("-t", metavar= "[threads]", help= "Amount of threads [56]", required= False, type=int, default= 56)
+	parser.add_argument("-t", metavar= "[threads]", help= "Amount of threads [max available up to 256 threads]", required= False, type=int, default= use_threads(256))
 	parser.add_argument("-g", metavar= "[gsize]", help= "Esitmated genome size [100m]", required= False, default= "100m")
 	parser.add_argument("--demultiplex", metavar= '', help= "MetaGalaxy will demultiplex the files from the specified input directory and trim the barcodes", required= False, type=bool, nargs= "?", const= True, default= False)
 	parser.add_argument("--bc_kit", metavar= "[]", help= "Specify the barcoding kit for demultiplexing. Only required when used in conjunction with --demultiplex", required= "--demultiplex" in sys.argv, default="")
@@ -122,9 +130,9 @@ if __name__ == "__main__":
 		logging.basicConfig(filename=MGlog, level=logging.DEBUG, format="%(asctime)s - %(levelname)-8s - %(threadName)-10s - %(message)s")
 		logging.info("MetaGalaxy initiated")
 		print("\nOutput directory already exists, do you want to clear the contents of the directory?")
-		logging.info("Output directory already exists, do you want to clear the contents of the directory?")
+		logging.warning("Output directory already exists, do you want to clear the contents of the directory?")
 		answer= input("[y/n]\n")
-		if answer == "y" or answer == "yes":
+		if answer == "y" or answer == "yes" or answer == "YES" or answer == "Y":
 			logging.info("Answer: Yes")
 			print("\nClearing directory...", end="\r")
 			logging.info("Clearing directory...")
@@ -133,12 +141,12 @@ if __name__ == "__main__":
 			os.system("find . ! -name 'MetaGalaxy.log' ! -name '.' ! -type d -exec rm -rf {} +")
 			print("Output directory has been cleared.\n")
 			logging.info("Output directory has been cleared")
-		elif answer == "n" or answer == "no":
+		elif answer == "n" or answer == "no" or answer == "NO" or answer == "N":
 			print("\nDirectory will not be cleared. Analyses resuming.\nNOTE: Existing data might be overwritten!\n")
 			logging.warning("Directory will not be cleared. Analyses resuming. NOTE: Existing data might be overwritten!")
 		else:
 			print("\nUnknown input. Please provide a valid input (y/yes - n/no). Exiting MetaGalaxy\n")
-			logging.error("Unknown input. Please provide a valid input (y/yes - n/no). Exiting MetaGalaxy")
+			logging.error("Unknown input. Please provide a valid input (y/yes - n/no). Exiting MetaGalaxy\n\n")
 			sys.exit(1)
 	elif os.path.exists(outdir) == False:
 		os.mkdir(outdir)
@@ -147,8 +155,6 @@ if __name__ == "__main__":
 		logging.info("MetaGalaxy initiated")
 		logging.info("Output directory "+outdir+" has been created")
 	threads= str(argument.t)
-	cores= int(argument.t/2)
-	cpu= str(cores.__round__())
 	gsize= argument.g
 	keep= argument.keep
 	if demultiplex == True:

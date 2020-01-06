@@ -6,7 +6,7 @@ if __name__ == "__main__":
 	if keep == True:
 		os.chdir(outdir)
 		os.system("mv Preliminary* taxonomy_raw_reads/ && mv taxonomy_values* taxonomy_raw_reads/ && mv *.files taxonomy_raw_reads/")
-	command= lib+"/"+programm+"/bin/flye --nano-raw "+outdir+"/filtered_"+fname+" -g "+gsize+" -o "+outdir+"/Assembly -t "+threads+" -i 0 --meta"
+	command= lib+"/"+programm+"/bin/flye --nano-raw "+outdir+"/*_extracted_plasmids.fastq -g "+gsize+" -o "+outdir+"/Assembly -t "+threads+" -i 0 --meta"
 	logging.info("Starting assembly")
 	run(command)
 	("Assembly complete, starting polishing")
@@ -51,4 +51,4 @@ if __name__ == "__main__":
 		os.chdir(outdir)
 		os.system("rm -rf "+outdir+"/Assembly/ "+outdir+"/*.paf "+outdir+"/*.sam "+outdir+"/filtered*.fastq "+outdir+"/polish_*.fasta* "+outdir+"/*.hdf "+outdir+"/calls*")
 	if keep == True:
-		os.system("mkdir "+outdir+"/polishing && mv "+outdir+"/polish_* "+outdir+"/polishing")
+		os.system("mkdir "+outdir+"/polishing && mv "+outdir+"/polish_* "+outdir+"/polishing && mv "+outdir+"/calls* "+outidir+"/polishing && mv "+outdir+"/*.hdf "+outdir+"/polishing")

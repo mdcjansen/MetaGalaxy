@@ -10,6 +10,7 @@ git clone https://github.com/matsen/pplacer
 git clone https://github.com/hyattpd/Prodigal
 git clone https://github.com/ablab/quast
 git clone https://github.com/dutilh/CAT
+git clone --recursive https://github.com/isovic/racon.git racon
 wget https://github.com/bbuchfink/diamond/releases/download/v0.9.29/diamond-linux64.tar.gz
 wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
 wget https://github.com/rrwick/Bandage/releases/download/v0.8.1/Bandage_Ubuntu_static_v0_8_1.zip
@@ -19,7 +20,7 @@ mv diamond* ./diamond
 tar xzvf master.tar.gz
 mv berkeleylab-metabat* ./metabat
 mv quast ./Quast
-mv CAT/CAT_PACK CAT/CAT
+mv CAT/CAT_pack/* CAT/ && rm -rf CAT/CAT_pack
 rm *.gz *.zip *.pdf
 cd Filtlong
 make -j
@@ -51,5 +52,10 @@ cd ../../Prodigal
 make
 cd ../Quast
 ./setup.py install_full
-cd ../metabat
+cd ../racon
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
+cd ../../metabat
 mkdir build ; cd build && cmake -DCMAKE_INSTALL_PREFIX=$(pwd) .. && make && make install && mv bin ../ && rm -rf ../build

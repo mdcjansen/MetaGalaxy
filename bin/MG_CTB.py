@@ -4,7 +4,7 @@ if __name__ == "__main__":
 	command= lib+"/"+programm+"/bin/jgi_summarize_bam_contig_depths --outputDepth "+outdir+"/contig_depth.txt --percentIdentity 80 "+outdir+"/polished_map.bam"
 	logging.info("Creating bins from assembly")
 	run(command)
-	command= lib+"/"+programm+"/bin/metabat2 -i "+outdir+"/polished_assembly.fasta -a "+outdir+"/contig_depth.txt -o "+outdir+"/bin -m 1500 --maxP 75 --minS 40 --maxEdges 500 -x 10 -s 50000 -t "+threads+" --saveCls"
+	command= lib+"/"+programm+"/bin/metabat2 -i "+outdir+"/polished_assembly.fasta -a "+outdir+"/contig_depth.txt -o "+outdir+"/bin --unbinned -m 1500 --maxP 75 --minS 40 --maxEdges 500 -x 10 -s 50000 -t "+threads+" --saveCls"
 	run(command)
 	logging.info("Bins have been created")
 	os.system("mkdir "+outdir+"/meta_bins && mv "+outdir+"/bin* "+outdir+"/meta_bins")

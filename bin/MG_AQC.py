@@ -5,7 +5,7 @@ if __name__ == "__main__":
 	run(command)
 	logging.info("Assembly visualised")
 	programm= "Quast"
-	command= lib+"/"+programm+"/metaquast.py "+outdir+"/polished_assembly.fasta -o "+outdir+"/quast_stats"
+	command= lib+"/"+programm+"/metaquast.py "+outdir+"/polished_assembly.fasta -o "+outdir+"/quast_stats -t 100 --silent"
 	logging.info("Assessing assembly quality")
 	run(command)
 	logging.info("Quality assessment complete")
