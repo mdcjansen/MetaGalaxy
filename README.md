@@ -17,12 +17,9 @@ A pipeline for metagenomic assembly and analysis, which can be used on Galaxy
 ## Requirements and dependencies
 
 * Linux
-* Python 3.6 and 2.7
+* Python 3.6
 * Java
 * Anaconda3
-* GCC 4.9 or later
-* boost 1.5.3
-* Core OS development headers
 
 
 ## Installation
@@ -37,23 +34,29 @@ Install MetaGalaxy:
 git clone https://github.com/mdcjansen/MetaGalaxy
 cd path/to/MetaGalaxy
 conda env create -f environment.yml
+chmod a+x bin/MetaGalaxy.py
 ```
 
 Install the tools:
 ```
-lib/install.sh
+cd lib
+chmod a+x install.sh
+./install.sh
 ```
 
 Install the databases:
 ```
-data/install.sh
+cd data
+chmod a+x install.sh
+./install_database.py
 ```
+
 It is possible to create your own databases for the tool as long as the folder structure is the same as the default folder structure of the tool.
 Building the databases may take several hours depending on the system configuration
 
-Make MetaGalaxy executable from anywhere:
+Make MetaGalaxy executable from within the anaconda environment:
 ```
-sudo ln -s path/to/Metagalaxy/bin/MetaGalaxy.py /usr/local/bin/MetaGalaxy
+ln -s path/to/Metagalaxy/bin/MetaGalaxy.py path/to/anaconda3/envs/metagalaxy/bin/MetaGalaxy
 ```
 
 ## Example commands
@@ -258,7 +261,9 @@ Metagalaxy uses the following tools in the pipeline:
 * [Medaka](https://github.com/nanoporetech/medaka)
 * [metaBAT](https://bitbucket.org/berkeleylab/metabat/src/master/)
 * [Minimap2](https://doi.org/10.1093/bioinformatics/bty191)
+* [NanoComp](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty149/4934939)
 * [NanoPlot](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty149/4934939)
+* [NanoStat](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty149/4934939)
 * [pplacer](https://github.com/matsen/pplacer)
 * [Prodigal](https://github.com/hyattpd/Prodigal)
 * [Quast](http://bioinformatics.oxfordjournals.org/content/29/8/1072.abstract?keytype=ref&ijkey=Kzq9lhMayiqecq9)

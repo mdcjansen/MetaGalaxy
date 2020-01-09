@@ -68,6 +68,9 @@ def trqc():
 
 def tflr():
 	exec(open(bin+"/MG_FLR.py").read());
+	
+def tpar():
+	exec(open(bin+"/MG_PAR.py").read());
 
 def tfqc():
 	exec(open(bin+"/MG_FQC.py").read());
@@ -90,14 +93,14 @@ def tbts():
 
 if __name__ == "__main__":
 	__author__= "M.D.C. Jansen"
-	__version__= "MetaGalaxy v1.4.0"
-	__date__= "21st of November, 2019"
+	__version__= "MetaGalaxy v2.0.0"
+	__date__= "6th of January, 2020"
 	done= False
 	ttime= time.time()
 	parser= argparse.ArgumentParser(prog="MetaGalaxy", description="MetaGalaxy is designed to identify bacteria from metagenomic samples and detect their AMR genes. It uses basecalled nanopore data in fastq format. Ensure that the conda environment is activated before using this pipeline [conda activate metagalaxy]. ", usage="%(prog)s -i <inputfile> [options]", epilog= "Thank you for using MetaGalaxy!")
 	parser._optionals.title= "Arguments for Metagalaxy"
 	parser.add_argument("-v", "--version", help= "Prints program version and exits Metagalaxy", action= "version", version= __version__+" "+__date__+" by "+__author__)
-	parser.add_argument("-i", metavar= "[input]", help= "Input .fastq file for analysis or file directory for demultiplexing", required= False)
+	parser.add_argument("-i", metavar= "[input]", help= "Input .fastq file for analysis or file directory for demultiplexing", required= "--bc_avail" not in sys.argv)
 	parser.add_argument("-o", metavar= "[output]", help= "Output directory", required= False, default= "Metagalaxy_output/")
 	parser.add_argument("-t", metavar= "[threads]", help= "Amount of threads [max available up to 256 threads]", required= False, type=int, default= use_threads(256))
 	parser.add_argument("-g", metavar= "[gsize]", help= "Esitmated genome size [100m]", required= False, default= "100m")
@@ -168,6 +171,7 @@ if __name__ == "__main__":
 	kpd= threading.Thread(target= tkpd)
 	rqc= threading.Thread(target= trqc)
 	flr= threading.Thread(target= tflr)
+	par= threading.Thread(target= tpar)
 	fqc= threading.Thread(target= tfqc)
 	apm= threading.Thread(target= tapm)
 	aqc= threading.Thread(target= taqc)
@@ -179,6 +183,7 @@ if __name__ == "__main__":
 	rqc.start()
 	flr.start()
 	flr.join()
+	par.start()
 	fqc.start()
 	knd.join()
 	kpd.join()
@@ -190,6 +195,7 @@ if __name__ == "__main__":
 	abr.start()
 	abr.join()
 	bts.start()
+	par.join()
 	rqc.join()
 	fqc.join()
 	aqc.join()

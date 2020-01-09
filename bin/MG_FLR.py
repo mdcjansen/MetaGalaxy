@@ -31,14 +31,5 @@ if __name__ == "__main__":
 		fastq.write(fastq_index[id]+"\n")
 	fastq.close()
 	logging.info("Plasmid reads extracted from main input")
-	programm= "abricate"
-	command= "abricate --threads "+threads+" --nopath --minid 60 --mincov 50 --db resfinder "+new_fastq+"_extracted_plasmids.fastq > "+outdir+"/plasmid_amr_results.tab"
-	logging.info("Identifying AMR genes in plasmid file")
-	run(command)
-	logging.info("Identification complete")
-	command= "abricate --summary --threads "+threads+" --nopath --db resfinder "+outdir+"/plasmid_amr_results.tab > "+outdir+"/plasmid_amr_summary.tab"
-	logging.info("Summarising AMR genes")
-	run(command)
-	logging.info("Summary complete")
 	if keep == False:
 		os.system("rm "+outdir+"/plasmid_read_id.txt")
