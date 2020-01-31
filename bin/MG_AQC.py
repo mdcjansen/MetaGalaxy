@@ -1,14 +1,14 @@
 if __name__ == "__main__":
 	programm= "Bandage"
-	command=lib+"/"+programm+"/Bandage image "+outdir+"/assembly_graph.gfa "+outdir+"/assembly_unpolished.jpg"
+	command= "{lib}/{prog}/Bandage image {od}/assembly_graph.gfa {od}/assembly_unpolished.jpg --height 2000 --width 2000".format(lib=lib, prog=programm, od=outdir)
 	logging.info("Visualising assembly")
 	run(command)
 	logging.info("Assembly visualised")
 	programm= "Quast"
-	command= lib+"/"+programm+"/metaquast.py "+outdir+"/polished_assembly.fasta -o "+outdir+"/quast_stats -t 100 --silent"
+	command= "{lib}/{prog}/metaquast.py {od}/polished_assembly.fasta -o {od}/assembly_stats -t {td} --silent".format(lib=lib, prog=programm, od=outdir, td=threads)
 	logging.info("Assessing assembly quality")
 	run(command)
 	logging.info("Quality assessment complete")
-	os.system("cp "+outdir+"/quast_stats/report.html "+outdir+"/assembly_quality_assessment.html")
+	os.system("cp {od}/assembly_stats/report.html {od}/assembly_quality_assessment.html".format(od=outdir))
 	if keep == False:
-		os.system("rm -rf "+outdir+"/quast_stats")
+		os.system("rm -rf {od}/assembly_stats".format(od=outdir))

@@ -1,0 +1,5 @@
+#FILE	SEQUENCE	START	END	STRAND	GENE	COVERAGE	COVERAGE_MAP	GAPS	%COVERAGE	%IDENTITY	DATABASE	ACCESSION	PRODUCT	RESISTANCE
+bin.1.fa	contig_3:1.0-4689978.0	6376	7608	-	mdf(A)_1	1-1233/1233	===============	0/0	100.00	97.97	resfinder	Y08743	mdf(A)	
+bin.1.fa	contig_3:1.0-4689978.0	549671	550026	-	tet(34)_1	66-421/465	.=======/=====.	2/2	76.34	74.79	resfinder	AB061440	tet(34)	
+bin.1.fa	contig_3:1.0-4689978.0	1098024	1099124	+	blaCFE-1_1	37-1146/1146	========/======	5/19	95.64	71.66	resfinder	AB107899	blaCFE-1	
+bin.2.fa	contig_10:1.0-2781074.0	2676764	2678263	-	lsa(A)_1	1-1497/1497	========/======	3/3	100.00	98.87	resfinder	AY225127	lsa(A)	Lincomycin;Clindamycin;Dalfopristin;Pristinamycin_IIA;Virginiamycin_M

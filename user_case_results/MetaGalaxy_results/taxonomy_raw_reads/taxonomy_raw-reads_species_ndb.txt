@@ -1,0 +1,3 @@
+86.26	1116121	875243	S	562	Escherichiacoli
+3.84	49705	40327	S	1351	Enterococcusfaecalis
+6.50	84085	84085	S	9606	Homosapiens

@@ -1,0 +1,3 @@
+16.68	215839	167572	S	562	Escherichiacoli
+3.72	48193	45349	S	1351	Enterococcusfaecalis
+0.29	3752	3752	S	9606	Homosapiens

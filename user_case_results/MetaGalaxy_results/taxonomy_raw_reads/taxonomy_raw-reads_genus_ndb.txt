@@ -1,0 +1,3 @@
+86.62	1120718	2668	G	561	Escherichia
+3.85	49777	14	G	1350	Enterococcus
+6.50	84085	0	G	9605	Homo

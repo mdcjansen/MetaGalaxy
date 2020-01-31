@@ -1,0 +1,65 @@
+2020-01-17 13:21:37,551 - INFO     - MainThread - MetaGalaxy initiated
+2020-01-17 13:21:37,551 - INFO     - MainThread - Output directory: /media/galaxymaster/TeacherFiles/MUMC/MUMC_final/BC04_16 has been created
+2020-01-17 13:21:37,552 - INFO     - MainThread - Found file: barcode04.fastq
+2020-01-17 13:21:37,552 - INFO     - MainThread - Settings MetaGalaxy:
+
+Input file:		barcode04.fastq
+Output directory:	/media/galaxymaster/TeacherFiles/MUMC/MUMC_final/BC04_16
+Threads:		28
+Estimated genome size:	8m
+Keep all files:		False
+
+2020-01-17 13:21:37,581 - INFO     - Thread-1   - Classifying taxonomy of raw reads with a nucleotide database (NDB)
+2020-01-17 13:21:37,589 - INFO     - Thread-2   - Classifying taxonomy of raw reads with a protein database (PDB)
+2020-01-17 13:21:37,591 - INFO     - Thread-3   - Assessing quality of raw reads
+2020-01-17 13:21:37,637 - INFO     - Thread-4   - Filtering raw reads
+2020-01-17 13:24:42,086 - INFO     - Thread-2   - raw reads have been taxonomically classified (PDB)
+2020-01-17 13:24:42,087 - INFO     - Thread-2   - Visualising taxonomy of raw reads from protein database
+2020-01-17 13:27:15,338 - INFO     - Thread-1   - raw reads have been taxonomically classified (NDB)
+2020-01-17 13:27:15,431 - INFO     - Thread-1   - Visualising taxonomy of raw reads from nucleotide database
+2020-01-17 13:27:15,818 - INFO     - Thread-4   - Reads have been filtered
+2020-01-17 13:27:15,819 - INFO     - Thread-4   - Identifying plasmid reads
+2020-01-17 13:29:55,285 - INFO     - Thread-3   - raw read quality assessment has been completed
+2020-01-17 13:39:48,090 - INFO     - Thread-4   - Reads Identified
+2020-01-17 13:39:48,099 - INFO     - Thread-4   - Found 227 unique identifiers in plasmid_read_id.txt
+2020-01-17 13:47:00,664 - INFO     - Thread-4   - Saved 227 reads from /media/galaxymaster/TeacherFiles/MUMC/MUMC_final/BC04_16/filtered_barcode04.fastq to /media/galaxymaster/TeacherFiles/MUMC/MUMC_final/BC04_16/plasmid_reads.fastq
+2020-01-17 13:47:24,392 - INFO     - Thread-4   - Plasmid reads extracted from main input
+2020-01-17 13:47:26,650 - INFO     - Thread-5   - Identifying AMR genes in plasmid file
+2020-01-17 13:47:26,675 - INFO     - Thread-6   - Assessing quality of filtered reads
+2020-01-17 13:47:27,037 - INFO     - Thread-7   - Starting assembly
+2020-01-17 14:01:39,059 - INFO     - Thread-6   - Quality assessment of filtered reads hase been completed
+2020-01-17 14:18:15,979 - INFO     - Thread-5   - Identification complete
+2020-01-17 14:18:15,979 - INFO     - Thread-5   - Summarising AMR genes
+2020-01-17 14:18:16,065 - INFO     - Thread-5   - Summary complete
+2020-01-17 14:40:21,334 - INFO     - Thread-7   - Polishing assembly, round: 1
+2020-01-17 15:05:52,449 - INFO     - Thread-7   - Polishing assembly, round: 2
+2020-01-17 15:30:40,927 - INFO     - Thread-7   - Polishing assembly, round: 3
+2020-01-17 15:55:08,499 - INFO     - Thread-7   - Polishing assembly, round: 4
+2020-01-17 16:19:34,549 - INFO     - Thread-7   - Polishing assembly, final round
+2020-01-17 16:37:04,678 - INFO     - Thread-7   - Polishing complete
+2020-01-17 16:37:04,679 - INFO     - Thread-7   - Creating SAM-file from polished assembly
+2020-01-17 16:38:46,816 - INFO     - Thread-7   - SAM-file created
+2020-01-17 16:38:46,816 - INFO     - Thread-7   - Creating BAM-file from polished assembly
+2020-01-17 16:49:12,310 - INFO     - Thread-7   - BAM-file created
+2020-01-17 16:49:16,422 - INFO     - Thread-8   - Visualising assembly
+2020-01-17 16:49:16,426 - INFO     - Thread-9   - Creating bins from assembly
+2020-01-17 16:49:16,847 - INFO     - Thread-8   - Assembly visualised
+2020-01-17 16:49:16,847 - INFO     - Thread-8   - Assessing assembly quality
+2020-01-17 16:50:27,289 - INFO     - Thread-9   - Bins have been created
+2020-01-17 16:50:27,293 - INFO     - Thread-9   - Checking for empty bins
+2020-01-17 16:50:27,301 - INFO     - Thread-9   - Binning complete, cleaning up files
+2020-01-17 16:50:27,797 - INFO     - Thread-9   - Clean up complete
+2020-01-17 16:50:27,799 - INFO     - Thread-10  - Identifying AMR genes in bins
+2020-01-17 16:50:29,609 - INFO     - Thread-10  - Identification complete
+2020-01-17 16:50:29,609 - INFO     - Thread-10  - Summarising AMR genes
+2020-01-17 16:50:29,660 - INFO     - Thread-10  - Summary complete
+2020-01-17 16:50:29,661 - INFO     - Thread-11  - Assigning taxonomy to bins
+2020-01-17 16:52:08,578 - INFO     - Thread-8   - Quality assessment complete
+2020-01-17 17:28:18,168 - INFO     - Thread-11  - taxonomic assignment complete
+2020-01-17 17:28:18,182 - INFO     - Thread-11  - Visualising taxonomy of all bins
+2020-01-17 17:37:14,477 - INFO     - MainThread - Completed analysis
+
+Thank you for using MetaGalaxy! The analysis took 04:15:36 to complete.
+
+
+

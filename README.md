@@ -1,6 +1,11 @@
 # MetaGalaxy
 
-A pipeline for metagenomic assembly and analysis, which can be used on Galaxy
+A pipeline for metagenomic assembly and analysis, that can also be used on Galaxy
+
+An overview of the pipeline is given below:
+![Screenshot](Metagalaxy_main_pipeline.png)
+
+The report describing MetaGalaxy and some benchmarks can be found [Here](https://github.com/mdcjansen/MetaGalaxy/blob/master/MetaGalaxy.pdf)
 
 ## Table of contents
 
@@ -43,6 +48,9 @@ cd lib
 chmod a+x install.sh
 ./install.sh
 ```
+
+MetaGalaxy does not provide Guppy with its distribution.
+Guppy can be downloaded and install from the Oxford Nanopore technologies [website](https://community.nanoporetech.com/protocols/Guppy-protocol/v/GPB_2003_v1_revM_14Dec2018)
 
 Install the databases:
 ```
@@ -128,9 +136,13 @@ Metagalaxy will carry out the following steps during analysis:
 1. Metagalaxy will perform taxonomic classification on the raw input file
 		* Taxonomic classification is performed by Kraken2
 		* Classification is performed with the use of a protein and nucleotide database
-2. Simultaniously, Metagalaxy will asses the quality of the reads and filter out the short reads
-		* The quality of the reads is calculated by FastQC
-    * The reads shorter than 1Kbp are filtered out by Filtlong
+2. Simultaneously, Metagalaxy will asses the quality of the reads and filter out the short reads
+		* The quality of the reads is calculated by NanoPlot
+		* The reads shorter than 1Kbp or below a quality score of 7 are filtered out by Filtlong
+3. After filtering on quality, plasmid reads are isolated an analysed
+		* Plasmid reads are identified with ABRicate and the PlasmidFinder database.
+		* These reads are then extracted from the main FASTQ file with a python script
+		* ABRicate is used to screen the reads for AMR genes
 3. After the reads are filtered, Metagalaxy will assemble the reads and polish the assembly
 		* Assembly is performed by Flye with the --meta option
 		* The first four rounds of polishing are performed by Racon
@@ -147,7 +159,7 @@ Metagalaxy will carry out the following steps during analysis:
 
 ## Interpeting output
 
-Metagalaxy will produce numerous output files for all the individual analysis. Here, all the outputs are explained. The files that are by default cleaned up, are not be explained in great detail.
+Metagalaxy will produce numerous output files for all the individual analysis. Here, all the outputs are explained. The files that are by default cleaned up, are not explained in great detail.
 
 
 #### Taxonomic classification on the raw input file
@@ -175,6 +187,12 @@ The report also includes multiple histograms which display the read length befor
 
 The filtered reads are put in a new .fastq file which has been named filtered.fastq
 
+#### Plasmid isolation and analysis
+
+After the reads have been filtered by Filtlong, the FASTQ file is screened for plasmid reads by ABRicate. A reads is considered to be from a plasmid when ABRicate finds a hit against the PlasmidFinder database with a minimum coverage and identity of 60%.
+These reads will then be extracted from the filtered.fastq file by a python script. After extraction these reads are screened again for AMR genes.
+The output of this AMR screening looks similar to the table shown (below)[####Binning]. There is one main difference between this screening and the AMR screening done later on the bins. When the plasmid reads are screened, ABRicate will a gene everytime it is found. This means that when a particular gene is covered ten times, the output file will show that particular gene ten times.
+When the screening is done on the bins. ABRicate will only report once on any found gene, unless there are duplicates present in the bin.
 
 #### Assembly, polishing, visualisation and quality assessment
 

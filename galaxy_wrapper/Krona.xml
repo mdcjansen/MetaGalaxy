@@ -1,0 +1,17 @@
+<tool id="Krona" name="Krona" version="1.0.0">
+  <description>chart of taxonomic abundance</description>
+  <command>/path/to/MetaGalaxy/lib/Krona/KronaTools/bin/ktImportTaxonomy -o "$output" "$input"</command>
+  <inputs>
+    <param name="input" type="data" format="tabular"
+           label="Input data" help="taxonomy file" />
+  </inputs>
+  <outputs>
+    <data name="output" format="html" />
+  </outputs>
+  <help>
+    Wrapper of Krona created by mdcjansen
+    Orginal wrapper written by ondovb
+    Only for use on Galaxy / ATGM-Avans
+    https://github.com/marbl/Krona
+  </help>
+</tool>
