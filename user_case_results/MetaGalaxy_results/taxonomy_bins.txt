@@ -1,3 +1,0 @@
-# bin	classification	reason	lineage	lineage scores	superkingdom	phylum	class	order	family	genus	species
-bin.1.fa	classified	based on 5489/5505 ORFs	1;131567;2;1224;1236;91347;543;561;562	1.00;0.93;0.81;0.24;0.21;0.21;0.20;0.10;0.08	Bacteria: 0.81	Proteobacteria: 0.24	Gammaproteobacteria: 0.21	Enterobacterales: 0.21	Enterobacteriaceae: 0.20	Escherichia: 0.10	Escherichia coli: 0.08
-bin.2.fa	classified	based on 4027/4067 ORFs	1;131567;2;1783272;1239;91061;186826;81852;1350;1351	1.00;1.00;0.99;0.11;0.09;0.09;0.07;0.07;0.07;0.05	Bacteria: 0.99	Firmicutes: 0.09	Bacilli: 0.09	Lactobacillales: 0.07	Enterococcaceae: 0.07	Enterococcus: 0.07	Enterococcus faecalis: 0.05

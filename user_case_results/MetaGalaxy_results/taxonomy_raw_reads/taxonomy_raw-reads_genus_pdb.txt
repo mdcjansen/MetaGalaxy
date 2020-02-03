@@ -1,5 +1,0 @@
-17.37	224728	5323	G	561	Escherichia
-0.36	4670	695	G	620	Shigella
-0.21	2723	24	G	194	Campylobacter
-3.75	48491	142	G	1350	Enterococcus
-0.29	3752	0	G	9605	Homo
